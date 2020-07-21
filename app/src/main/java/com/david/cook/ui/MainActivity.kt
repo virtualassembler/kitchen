@@ -17,26 +17,35 @@ import com.david.cook.repository.RecipeRepository
 import com.david.cook.utils.ID_SOCCER_LEAGUE
 import kotlinx.android.synthetic.main.activity_main.recyclerView
 
-class MainActivity : AppCompatActivity(), SoccerLeagueEvents {
+class MainActivity : AppCompatActivity(), RecipeEvents {
 
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var soccerLeagueRepository: RecipeRepository
     private lateinit var soccerLeagueListAdapter: RecipeListAdapter
 
     private val soccerLeagueViewModel by lazy {
-        return@lazy ViewModelProviders.of(this).get(RecipeViewModel(application.applicationContext)::class.java)
+        return@lazy ViewModelProviders.of(this).get(RecipeViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var cru = 1+1;
         //launchDialogFragment(R.string.app_name, R.drawable.soccer_leagues)
-        val soccerLeagueLiveData = MutableLiveData <List<Recipe>>()
-        RecipeRepository(applicationContext).requestMovieReviewList("",soccerLeagueLiveData)
-        //soccerLeagueViewModel.callApi("Spanish La Liga")
-        //comment observeResponseData()
+        soccerLeagueViewModel.callApi("Spanish La Liga")
+        observeResponseData()
     }
+    /*
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        var cru = 1+1;
+
+        //val soccerLeagueLiveData = MutableLiveData <List<Recipe>>()
+        //RecipeRepository(applicationContext).requestMovieReviewList("",soccerLeagueLiveData)
+        soccerLeagueViewModel.callApi("Spanish La Liga")
+        observeResponseData()
+    }
+    */
 
     private fun observeResponseData() {
         soccerLeagueViewModel.soccerLeagueLiveData.observe(this, Observer { data ->

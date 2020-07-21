@@ -6,40 +6,33 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.david.cook.R
 import com.david.cook.data.local.Recipe
+import kotlinx.android.synthetic.main.list_item.view.*
 
-/**
- * SoccerLeagueListAdapter
- *
- * Provides access to the SoccerLeague data items, makes a View for each SoccerLeague item
- *
- * @author david.mazo
- */
-
-class RecipeListAdapter(private val soccerLeagueEvents: SoccerLeagueEvents) :
+class RecipeListAdapter(private val recipeEvents: RecipeEvents) :
         RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
 
-    private var listSoccerLeague: List<Recipe> = listOf()
+    private var listRecipe: List<Recipe> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false))
     }
 
     override fun getItemCount(): Int {
-        return listSoccerLeague.size
+        return listRecipe.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(listSoccerLeague[position], soccerLeagueEvents)
+        holder.bindItem(listRecipe[position], recipeEvents)
     }
 
-    fun addAll(listSoccerLeague: List<Recipe>) {
-        this.listSoccerLeague = listSoccerLeague
+    fun addAll(listRecipe: List<Recipe>) {
+        this.listRecipe = listRecipe
         notifyDataSetChanged()
     }
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        fun bindItem(soccerLeague: Recipe, listener: SoccerLeagueEvents) {
-            //comment itemView.textViewName.text = soccerLeague.strTeam
+        fun bindItem(recipe: Recipe, listener: RecipeEvents) {
+            itemView.textViewName.text = recipe.title
             /*comment
             itemView.textViewStadium.text = "Stadium: ${soccerLeague.strStadium}"
             Glide.with(itemView)
@@ -49,7 +42,7 @@ class RecipeListAdapter(private val soccerLeagueEvents: SoccerLeagueEvents) :
                     .override(1000, 1000)
                     .into(itemView.imageViewTeamBadge)
             */
-            view.setOnClickListener { listener.onItemClicked(soccerLeague) }
+            view.setOnClickListener { listener.onItemClicked(recipe) }
         }
     }
 }

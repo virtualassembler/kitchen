@@ -11,7 +11,7 @@ data class Recipe(
         @ColumnInfo(name = "id")
         var id: Int,
         @SerializedName("title")
-        var tile: String?)
+        var title: String?)
 
 /*
 @Entity(tableName = "recipes")
