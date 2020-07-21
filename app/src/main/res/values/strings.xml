@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Soccer Leagues</string>
+    <string name="website_title">Website:</string>
+    <string name="social_networks_title">Social network</string>
+    <string name="description_title">Team description</string>
+    <string name="next_events_title">Next 5 events</string>
+    <string name="action_spanish_league">Spanish La Liga</string>
+    <string name="action_german_league">German Bundesliga</string>
+    <string name="action_english_league">English Premier League</string>
+    <string name="release_date">Release date</string>
+    <string name="no_items">There are no items to show</string>
+    <string name="error_tag">Error</string>
+    <string name="movie_detail">Detail</string>
+    <string name="image_item">image Item</string>
+    <string name="original_name">Name</string>
+    <string name="error_response_code_different_to_200">Response code != 200</string>
+    <string name="movie_review_database_updated">Local data updated</string>
+    <string name="not_network_connection">There is not network connection</string>
+</resources>
