@@ -2,7 +2,6 @@ package com.david.cook.repository
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.david.cook.data.local.Recipe
 import com.david.cook.data.local.RecipeDao
 import com.david.cook.data.local.RecipeDatabase
@@ -17,7 +16,7 @@ class RecipeRepository(private val context: Context) {
     private val recipeDatabase: RecipeDao get() = RecipeDatabase.getRecipe(context).getRecipeDAO()
 
     fun requestRecipeList(): List<Recipe> {
-        ApiRequest.instance.getMovieReviewListFromInternet().enqueue(object : Callback<List<Recipe>> {
+        ApiRequest.instance.getRecipeListFromApi().enqueue(object : Callback<List<Recipe>> {
 
             override fun onFailure(call: Call<List<Recipe>>, t: Throwable) {
                 Log.e("a12","entro en onfailure")
@@ -42,7 +41,7 @@ class RecipeRepository(private val context: Context) {
         }
     }
 
-    fun getFilteredRoadReferenceList(roadReferenceHash: String): List<Recipe> {
-        return recipeDatabase.getFilteredRecipeList("%$roadReferenceHash%")
+    fun getFilteredRoadReferenceList(recipeHash: String): List<Recipe> {
+        return recipeDatabase.getFilteredRecipeList("%$recipeHash%")
     }
 }

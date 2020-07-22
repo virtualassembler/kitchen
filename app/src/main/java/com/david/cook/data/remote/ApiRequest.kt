@@ -12,15 +12,7 @@ import retrofit2.http.Query
 interface ApiRequest {
 
     @GET(SEARCH_ALL_RECIPES)
-    fun getMovieReviewListFromInternet(): Call<List<Recipe>>
-
-    /*
-    @GET(SEARCH_ALL_RECIPES)
-    fun getRecipeList() : Call<List<Recipe>>
-
-    @GET(NEXT_EVENTS)
-    fun getTeamListFromInternet(@Query(ID_TEAM) id: String?): Call<TeamResponse>
-    */
+    fun getRecipeListFromApi(): Call<List<Recipe>>
 
     companion object {
         val instance: ApiRequest = Retrofit.Builder()

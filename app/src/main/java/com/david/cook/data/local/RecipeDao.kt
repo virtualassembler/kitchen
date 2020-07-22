@@ -18,5 +18,5 @@ interface RecipeDao {
     fun getFilteredRecipeList(roadReferenceHash: String): List<Recipe>
 
     @Query("DELETE FROM recipes")
-    fun deleteAllSoccerLeague()
+    fun deleteAllRecipes()
 }

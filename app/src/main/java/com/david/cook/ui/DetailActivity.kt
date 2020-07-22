@@ -18,13 +18,11 @@ class DetailActivity : AppCompatActivity() {
         setContentView(com.david.cook.R.layout.detail_activity)
         /*
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val idSoccerLeague = getSoccerLeague(this).getSoccerLeagueDAO().getSoccerLeagueDetail(intent.getIntExtra(ID_SOCCER_LEAGUE, 0))
+        val idSoccerLeague = getSoccerLeague(this).getSoccerLeagueDAO().getSoccerLeagueDetail(intent.getIntExtra(ID_RECIPE, 0))
         bindSoccerLeague(idSoccerLeague)
         requestNextFiveEvents(idSoccerLeague)
-
          */
     }
-
 
     /*
     private fun requestNextFiveEvents(soccerLeague: SoccerLeague) {
