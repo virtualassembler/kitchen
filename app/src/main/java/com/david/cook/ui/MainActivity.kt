@@ -26,80 +26,45 @@ class MainActivity : AppCompatActivity(), RecipeEvents {
     private lateinit var recipeListAdapter: RecipeListAdapter
     //private lateinit var adapter: ArrayAdapter<Recipe>
 
-    private val soccerLeagueViewModel by lazy {
+    private val recipeViewModel by lazy {
         return@lazy ViewModelProviders.of(this).get(RecipeViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //launchDialogFragment(R.string.app_name, R.drawable.soccer_leagues)
-        soccerLeagueViewModel.callApi("Spanish La Liga")
+        recipeViewModel.getRecipeList()
         observeResponseData()
-
-
+        search()
     }
-
-    /*
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        var cru = 1+1;
-
-        //val soccerLeagueLiveData = MutableLiveData <List<Recipe>>()
-        //RecipeRepository(applicationContext).requestMovieReviewList("",soccerLeagueLiveData)
-        soccerLeagueViewModel.callApi("Spanish La Liga")
-        observeResponseData()
-    }
-    */
 
     private fun observeResponseData() {
-        soccerLeagueViewModel.recipeLiveData.observe(this, Observer { data ->
-            //if (hasConnection()) {
-                RecipeDatabase.getRecipe(applicationContext).getRecipeDAO().deleteAllSoccerLeague()
-                val recipeDao: RecipeDao = RecipeDatabase.getRecipe(application.applicationContext).getRecipeDAO()
-                for (recipe: Recipe in data) {
-                    recipeDao.insertRecipe(recipe)
+        recipeViewModel.recipeLiveData.observe(this, Observer { data ->
+            recipeListAdapter = RecipeListAdapter(this)
+            gridLayoutManager = GridLayoutManager(this, 2)
+            recyclerView.layoutManager = gridLayoutManager
+            recyclerView.adapter = recipeListAdapter
+            recipeRepository = RecipeRepository(this@MainActivity)
+            //recipeListAdapter.addAll(RecipeDatabase.getRecipe(application.applicationContext).getRecipeDAO().getRecipeList())
+        })
+    }
+
+    private fun search(){
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(charSequence: CharSequence, s: Int, b: Int, c: Int) {
+                Log.e("a004",""+charSequence.toString());
+                if (charSequence.isNotEmpty()){
+                    recipeViewModel.getFilteredRecipeList(charSequence.toString())
+                }else{
+                    Log.e("a004","charsequense is empty");
+                    recipeViewModel.getRecipeList()
+                    recipeListAdapter.addAll(recipeViewModel.getRecipeListLiveData())
                 }
-                recipeListAdapter = RecipeListAdapter(this)
-                gridLayoutManager = GridLayoutManager(this, 2)
-                recyclerView.layoutManager = gridLayoutManager
-                recyclerView.adapter = recipeListAdapter
 
 
-
-                recipeRepository = RecipeRepository(this@MainActivity)
-                recipeListAdapter.addAll(RecipeDatabase.getRecipe(application.applicationContext).getRecipeDAO().getRecipeList())
-
-            //search
-            searchInput.addTextChangedListener(object : TextWatcher {
-                override fun onTextChanged(charSequence: CharSequence, s: Int, b: Int, c: Int) {
-                    Log.e("a004",""+charSequence.toString());
-                    if (charSequence.isNotEmpty()){
-                        soccerLeagueViewModel.getFilteredRecipeList(charSequence.toString())
-                        //observeResponseData()
-                    }else{
-                        Log.e("a004","charsequense is empty");
-                        soccerLeagueViewModel.callApi()
-                    }
-                        //recipeListAdapter.addAll(RecipeDatabase.getRecipe(application.applicationContext).getRecipeDAO().getFilteredRecipeList(charSequence.toString()))
-
-                    recipeListAdapter.notifyDataSetChanged()
-                }
-                override fun afterTextChanged(editable: Editable) {}
-                override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
-            })
-        //}
-            /*
-            else{
-                soccerLeagueListAdapter = RecipeListAdapter(this)
-                gridLayoutManager = GridLayoutManager(this, 2)
-                recyclerView.layoutManager = gridLayoutManager
-                recyclerView.adapter = soccerLeagueListAdapter
-                soccerLeagueRepository = RecipeRepository(this@MainActivity)
-                soccerLeagueListAdapter.addAll(RecipeDatabase.getRecipe(application.applicationContext).getRecipeDAO().getRecipeList())
             }
-            */
+            override fun afterTextChanged(editable: Editable) {}
+            override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
         })
     }
 
@@ -112,15 +77,15 @@ class MainActivity : AppCompatActivity(), RecipeEvents {
 
         return when (item.itemId) {
             R.id.spanish_league -> {
-                soccerLeagueViewModel.callApi("Spanish La Liga")
+                recipeViewModel.getRecipeList()
                 return true
             }
             R.id.german_bundesliga -> {
-                soccerLeagueViewModel.callApi("German Bundesliga")
+                recipeViewModel.getRecipeList()
                 return true
             }
             R.id.english_league -> {
-                soccerLeagueViewModel.callApi("English Premier League")
+                recipeViewModel.getRecipeList()
                 return true
             }
             else -> super.onOptionsItemSelected(item)

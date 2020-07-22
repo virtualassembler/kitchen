@@ -16,7 +16,7 @@ class RecipeRepository(private val context: Context) {
 
     private val recipeDatabase: RecipeDao get() = RecipeDatabase.getRecipe(context).getRecipeDAO()
 
-    fun requestRecipeList(liveData: MutableLiveData<List<Recipe>>) {
+    fun requestRecipeList(): List<Recipe> {
         ApiRequest.instance.getMovieReviewListFromInternet().enqueue(object : Callback<List<Recipe>> {
 
             override fun onFailure(call: Call<List<Recipe>>, t: Throwable) {
@@ -28,12 +28,10 @@ class RecipeRepository(private val context: Context) {
             override fun onResponse(call: Call<List<Recipe>>, response: Response<List<Recipe>>) {
                 Log.e("a12","entro en onresponse")
                 Log.e("a10",""+response.body())
-                //Save on local db
                 insertRecipeListIntoDatabase(response);
-                //get from data straight to view model
-                liveData.value = recipeDatabase.getRecipeList()
             }
         })
+        return recipeDatabase.getRecipeList()
     }
 
     private fun insertRecipeListIntoDatabase(response: Response<List<Recipe>>) {
@@ -44,16 +42,7 @@ class RecipeRepository(private val context: Context) {
         }
     }
 
-    fun getAllRecipes(liveData: MutableLiveData<List<Recipe>>) {
-        liveData.value = recipeDatabase.getRecipeList()
-        var cuantos = recipeDatabase.getRecipeList().size
-        var cuantos2 = recipeDatabase.getRecipeList().size
+    fun getFilteredRoadReferenceList(roadReferenceHash: String): List<Recipe> {
+        return recipeDatabase.getFilteredRecipeList("%$roadReferenceHash%")
     }
-
-    fun getFilteredRoadReferenceList(roadReferenceHash: String, liveData: MutableLiveData<List<Recipe>>) {
-        //return recipeDatabase.getFilteredRecipeList("%$roadReferenceHash%")
-        liveData.value = recipeDatabase.getFilteredRecipeList("%$roadReferenceHash%")
-        //return RoadReferenceDatabase.getInstance(application.applicationContext)!!.roadReferenceDao().getFilteredRoadReferences("%$roadReferenceHash%")
-    }
-
 }
