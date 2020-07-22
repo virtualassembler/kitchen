@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), RecipeEvents {
 
     private lateinit var gridLayoutManager: GridLayoutManager
-    private lateinit var recipeRepository: RecipeRepository
+    //private lateinit var recipeRepository: RecipeRepository
     private lateinit var recipeListAdapter: RecipeListAdapter
     //private lateinit var adapter: ArrayAdapter<Recipe>
 
@@ -33,18 +33,19 @@ class MainActivity : AppCompatActivity(), RecipeEvents {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        recipeViewModel.getRecipeList()
+        //recipeViewModel.getRecipeList()
+        recipeListAdapter = RecipeListAdapter(this)
+        gridLayoutManager = GridLayoutManager(this, 2)
+        recyclerView.layoutManager = gridLayoutManager
+        recyclerView.adapter = recipeListAdapter
         observeResponseData()
         search()
     }
 
     private fun observeResponseData() {
         recipeViewModel.recipeLiveData.observe(this, Observer { data ->
-            recipeListAdapter = RecipeListAdapter(this)
-            gridLayoutManager = GridLayoutManager(this, 2)
-            recyclerView.layoutManager = gridLayoutManager
-            recyclerView.adapter = recipeListAdapter
-            recipeRepository = RecipeRepository(this@MainActivity)
+            recipeListAdapter.addAll(data)
+            //recipeRepository = RecipeRepository(this@MainActivity)
             //recipeListAdapter.addAll(RecipeDatabase.getRecipe(application.applicationContext).getRecipeDAO().getRecipeList())
         })
     }
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity(), RecipeEvents {
                 }else{
                     Log.e("a004","charsequense is empty");
                     recipeViewModel.getRecipeList()
-                    recipeListAdapter.addAll(recipeViewModel.getRecipeListLiveData())
+                    //recipeListAdapter.addAll(recipeViewModel.getRecipeListLiveData())
                 }
 
 

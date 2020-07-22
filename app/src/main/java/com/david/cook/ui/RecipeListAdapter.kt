@@ -8,8 +8,7 @@ import com.david.cook.R
 import com.david.cook.data.local.Recipe
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class RecipeListAdapter(private val recipeEvents: RecipeEvents) :
-        RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
+class RecipeListAdapter(private val recipeEvents: RecipeEvents):RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
 
     private var listRecipe: List<Recipe> = listOf()
 
