@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -19,7 +18,7 @@ class MainActivity : AppCompatActivity(), RecipeEvents {
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var recipeListAdapter: RecipeListAdapter
 
-    private val recipeViewModel by lazy {
+    val recipeViewModel by lazy {
         return@lazy ViewModelProviders.of(this).get(RecipeViewModel::class.java)
     }
 
@@ -44,11 +43,9 @@ class MainActivity : AppCompatActivity(), RecipeEvents {
     private fun search(){
         searchInput.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(charSequence: CharSequence, s: Int, b: Int, c: Int) {
-                Log.e("a004",""+charSequence.toString());
                 if (charSequence.isNotEmpty()){
                     recipeViewModel.getFilteredRecipeList(charSequence.toString())
                 }else{
-                    Log.e("a004","charsequense is empty");
                     recipeViewModel.getRecipeList()
                 }
             }

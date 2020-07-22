@@ -18,7 +18,7 @@
             android:background="@drawable/generic_border">
 
             <ImageView
-                android:id="@+id/imageViewTeamBadge"
+                android:id="@+id/imageViewRecipe"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
@@ -37,7 +37,7 @@
                 android:text="@string/original_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewTeamBadge" />
+                app:layout_constraintTop_toBottomOf="@+id/imageViewRecipe" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

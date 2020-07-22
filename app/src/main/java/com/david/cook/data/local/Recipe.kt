@@ -12,16 +12,3 @@ data class Recipe(
         var id: Int,
         @SerializedName("title")
         var title: String?)
-
-/*
-@Entity(tableName = "recipes")
-data class Recipe(
-        @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = "id")
-        var id: Int,
-        @SerializedName("title")
-        var title: String?
-
-)
-
- */

@@ -19,14 +19,10 @@ class RecipeRepository(private val context: Context) {
         ApiRequest.instance.getRecipeListFromApi().enqueue(object : Callback<List<Recipe>> {
 
             override fun onFailure(call: Call<List<Recipe>>, t: Throwable) {
-                Log.e("a12","entro en onfailure")
                 Log.e(TAG_ON_FAILURE, t.printStackTrace().toString())
-                Log.e("a11",""+t.printStackTrace().toString())
             }
 
             override fun onResponse(call: Call<List<Recipe>>, response: Response<List<Recipe>>) {
-                Log.e("a12","entro en onresponse")
-                Log.e("a10",""+response.body())
                 insertRecipeListIntoDatabase(response);
             }
         })
@@ -41,7 +37,11 @@ class RecipeRepository(private val context: Context) {
         }
     }
 
-    fun getFilteredRoadReferenceList(recipeHash: String): List<Recipe> {
+    fun getFilteredRecipeList(recipeHash: String): List<Recipe> {
         return recipeDatabase.getFilteredRecipeList("%$recipeHash%")
+    }
+
+    fun getRecipeById(recipeId: Int):Recipe{
+        return recipeDatabase.getRecipeById(recipeId)
     }
 }

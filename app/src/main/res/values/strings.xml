@@ -6,7 +6,7 @@
     <string name="image_item">image Item</string>
     <string name="original_name">Name</string>
     <string name="error_response_code_different_to_200">Response code != 200</string>
-    <string name="database_updated">Local data updated</string>
+    <string name="database_updated">Local data has been updated successfully</string>
     <string name="not_network_connection">There is not network connection</string>
     <string name="search">Search</string>
 </resources>

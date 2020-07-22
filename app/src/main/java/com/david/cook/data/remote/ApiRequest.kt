@@ -1,13 +1,11 @@
 package com.david.cook.data.remote
 
 import com.david.cook.data.local.Recipe
-import com.david.cook.data.local.RecipeResponse
 import com.david.cook.utils.*
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface ApiRequest {
 
