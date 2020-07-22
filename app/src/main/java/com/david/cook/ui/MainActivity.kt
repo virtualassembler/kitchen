@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity(), RecipeEvents {
         gridLayoutManager = GridLayoutManager(this, 2)
         recyclerView.layoutManager = gridLayoutManager
         recyclerView.adapter = recipeListAdapter
+        recipeViewModel.getRecipeList()
         observeResponseData()
         search()
     }
@@ -45,8 +46,6 @@ class MainActivity : AppCompatActivity(), RecipeEvents {
     private fun observeResponseData() {
         recipeViewModel.recipeLiveData.observe(this, Observer { data ->
             recipeListAdapter.addAll(data)
-            //recipeRepository = RecipeRepository(this@MainActivity)
-            //recipeListAdapter.addAll(RecipeDatabase.getRecipe(application.applicationContext).getRecipeDAO().getRecipeList())
         })
     }
 
@@ -59,10 +58,7 @@ class MainActivity : AppCompatActivity(), RecipeEvents {
                 }else{
                     Log.e("a004","charsequense is empty");
                     recipeViewModel.getRecipeList()
-                    //recipeListAdapter.addAll(recipeViewModel.getRecipeListLiveData())
                 }
-
-
             }
             override fun afterTextChanged(editable: Editable) {}
             override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
