@@ -33,15 +33,6 @@ class RecipeListAdapter(private val recipeEvents: RecipeEvents) :
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bindItem(recipe: Recipe, listener: RecipeEvents) {
             itemView.textViewName.text = recipe.title
-            /*comment
-            itemView.textViewStadium.text = "Stadium: ${soccerLeague.strStadium}"
-            Glide.with(itemView)
-                    .load(soccerLeague.strTeamBadge)
-                    .centerCrop()
-                    .fitCenter()
-                    .override(1000, 1000)
-                    .into(itemView.imageViewTeamBadge)
-            */
             view.setOnClickListener { listener.onItemClicked(recipe) }
         }
     }

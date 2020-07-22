@@ -16,4 +16,5 @@
     <string name="error_response_code_different_to_200">Response code != 200</string>
     <string name="movie_review_database_updated">Local data updated</string>
     <string name="not_network_connection">There is not network connection</string>
+    <string name="search">Search</string>
 </resources>

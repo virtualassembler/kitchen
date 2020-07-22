@@ -18,7 +18,6 @@ interface ApiRequest {
     @GET(SEARCH_ALL_RECIPES)
     fun getRecipeList() : Call<List<Recipe>>
 
-
     @GET(NEXT_EVENTS)
     fun getTeamListFromInternet(@Query(ID_TEAM) id: String?): Call<TeamResponse>
     */

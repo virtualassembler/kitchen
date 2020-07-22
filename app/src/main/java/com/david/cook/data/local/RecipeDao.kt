@@ -14,10 +14,8 @@ interface RecipeDao {
     @Query("SELECT * FROM recipes")
     fun getRecipeList(): List<Recipe>
 
-    /*
-    @Query("SELECT * FROM recipes WHERE recipe.id=:id")
-    fun getSoccerLeagueDetail(id: Int): Recipe
-    */
+    @Query("SELECT * FROM recipes WHERE title LIKE :roadReferenceHash ORDER BY title DESC")
+    fun getFilteredRecipeList(roadReferenceHash: String): List<Recipe>
 
     @Query("DELETE FROM recipes")
     fun deleteAllSoccerLeague()
